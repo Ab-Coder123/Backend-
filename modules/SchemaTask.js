@@ -8,7 +8,7 @@ const TaskSchemadata = new Schema({
     },  
     Description: {
     type: String,
-    required: true
+    required: false 
     },
     Due_date: {
     type: Date,
