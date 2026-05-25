@@ -1,5 +1,8 @@
 // PostTask 
 const router = require('express').Router()
+// import models
+const TaskSchema = require('../modules/SchemaTask.js')
+// post task 
 router.post('/addtask', async (req, res) => {
     const newTask = new Task()
     newTask.Name_task = req.body.title
@@ -11,21 +14,16 @@ router.post('/addtask', async (req, res) => {
     await newTask.save()
     res.send("new task added successfully")
 }) ;
-// import models
-const TaskSchema = require('../modules/SchemaTask.js')
-
 // GetTask
 router.get('/gettasks', async (req, res) => {
     const data_task = await TaskSchema.find()
     res.json(data_task)
 }) ;
-
 // DeleteTask
 router.delete(`/deletetasks_id=:_id`, async (req, res) => {
     const deletedTask = await TaskSchema.findByIdAndDelete(req.params._id)
     res.send("delete_task", deletedTask)
 }) ;
-
 // UpdateTask
 router.put(`/updatetasks_id=:_id`, async (req, res) => {
     const updatedTask = await TaskSchema.findByIdAndUpdate(req.params._id, {
